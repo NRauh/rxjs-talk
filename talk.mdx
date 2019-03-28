@@ -1,15 +1,123 @@
-# hello
-
----
+import { Notes } from 'mdx-deck';
 import { CodeSurfer } from 'mdx-deck-code-surfer';
 
+# Meeting RxJS
+
+```notes
+- This is going to be a short talk to try and get you familiar with or aware of RxJS
+- It's going to be pretty beginner focused
+- RxJS and reactive programming are huge complex things that I don't think I'd be able to teach in one 30 minute talk
+```
+
+---
+
+# Reactive Programming
+
+```notes
+- First I want to talk about reactive programming as a concept
+- I'm really going to gloss over it, because I wouldn't say I'm a huge source of truth on the subject
+- But I want to make you aware of it
+```
+
+---
+
+# A Definition
+
+* A programming paradigm
+* Opposite of imperative programming
+* Observing and setting data from a distance
+* Usually more functional and declarative
+
+```notes
+- A rough definition of reactive programming could be that it's
+- a paradigm of programming
+- generally thought of as the opposite of imperative programming
+- based around viewing and setting data from a far
+- and not always, but it usually means you're writing more functional code
+```
+
+---
+
+# Spreadsheet Cliche
+
+```csv
+10,20,=SUM(A1,B1)
+```
+
+```notes
+- A really common analogy is spreadsheets
+- Lets say you have two cells, and you want a third to show the sum of them
+- In a spreadsheet, you'll write your fomula
+- then regardless of how or when the value of either number updates, you'll have a fresh output
+```
+
+---
+
 <CodeSurfer
-  code={require("!raw-loader!./code_samples/test.js").default}
-  lang="javascript"
-  showNumbers={true}
-  dark={true}
+  title='Imperative Sum'
+  code={require('!raw-loader!./code_samples/01_sad_sum.js').default}
+  lang='javascript'
   steps={[
-    { notes: "I am a note" },
-    { lines: [1], notes: "Another note" }
+    {},
+    { lines: [1] },
+    { lines: [2, 3] },
+    { lines: [4] },
+    { lines: [6] },
+    { lines: [8] },
+    {},
   ]}
 />
+
+```notes
+- Here's an example of us failing to do the same in javascript
+- First we'll get an output
+- Next set the numbers
+- Compute the sum 
+- And show an output
+- But as you can imagine, when we set the number downhere, out output is still going to show the previous sum
+- I'll show an example with RxJS later on
+```
+
+---
+
+# Reasons to Care
+
+* Code can be more self contained
+* Manage async code
+  - Network request
+  - Anything the user does
+* You want to write functional code
+
+```notes
+- There's a few reasons why you'd want to write reactive code
+- The first reason might not be very obvious, but it's possible to write more self contained code
+  - Say you have a cart
+  - Rather than updating the price of a product, then explicitly telling the cart to update the total
+  - The cart can essentially listen for changes to the products inside it
+  - Then if the price of one changes, regardless of how, it will know to compute an updated total
+- Secondly, it also really helps with managing async code
+- In this context async code can mean something like
+  - user input
+  - a network request
+  - even the user's state or flow over a process
+- Lastly, if you're interested in functional programming, you'll probably get more of that
+```
+
+---
+
+# You're Probably Not New To This
+
+* React is an obvious example
+  - (and Redux or Mobx)
+* Vue also makes it really easy
+* Angular heavily uses RxJS
+
+```notes
+- You might not be too familiar with RxJS
+- But most popular frameworks help you write reactive code
+- React is a clear example
+  - Especially with Redux or Mobx
+- It's also really natural and easy to create reactive code with Vue
+- And Angular and has really good support for RxJS
+  - And leverages it a lot internally
+```
