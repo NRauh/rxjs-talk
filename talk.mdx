@@ -100,6 +100,7 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
   - user input
   - a network request
   - even the user's state or flow over a process
+- Race conditions are a pretty cool example
 - Lastly, if you're interested in functional programming, you'll probably get more of that
 ```
 
@@ -120,4 +121,180 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 - It's also really natural and easy to create reactive code with Vue
 - And Angular and has really good support for RxJS
   - And leverages it a lot internally
+```
+
+---
+
+# RxJS
+
+* A library to help write reactive code
+* Not a framework
+* Part of ReactiveX
+  - Conceptually similar libraries exist for Swift, Java, .Net, and more
+
+```notes
+- So lets talk about RxJS
+- RxJS is a library that helps you write reactive code that follows the observer pattern
+- It's part of reactive extensions, so similar libraries exist in many languages
+  - Such as Swift, C#, and Java
+  - Though I should say some versions such as the Ruby version, are completely dead and were never really used
+- An important distinction to make is RxJS isn't a framework
+- You are going to have a dissapointing time if you try to build a large app with just this
+- That said, if you wanted you could use it to help build a framework
+```
+
+---
+
+<CodeSurfer
+  title='Trivial Example'
+  code={require('!raw-loader!./code_samples/02_rxjs_trivial.js').default}
+  lang='javascript'
+  steps={[
+    {},
+    { range: [1, 3] },
+    { tokens: { 3: [2] } },
+    { range: [5, 6], tokens: { 7: [1] } },
+    { range: [5, 9] },
+    {},
+  ]}
+/>
+
+```notes
+- Here's a really basic example of using RxJS
+- First I'm going to make on observable of `37`, `42`, `1`, and `102`
+- The dollar sign at the end of our variable is just convention for saying it's an observable
+- Next I'm going to pipe each value into a map function, which will multiply it by two
+- Finally I'm going to subscribe to my source, which will run the callback for each value after being piped 
+```
+
+---
+
+# Trivial Example output
+
+```js
+// The value: 74
+// The value: 84
+// The value: 2
+// The value: 204
+```
+
+```notes
+- If we were to run that code, this would be our output
+- You can see it's not really much of a useful example
+- But I'll build up to one that is
+```
+
+---
+
+# Observable Sources
+
+* Where your observable sequence comes from
+* Examples:
+  - `of`: `of(1, 2, 3)`
+  - `from`: `from([1, 2, 3])`
+  - `interval`: `interval(1000)`
+  - `fromEvent`: `fromEvent(nukeAlertButton, 'click')`
+  - `ajax`: `ajax(url)`
+  - `webSocket`: `webSocket(url)`
+
+```notes
+- Observables are a sequences of data over time
+- They can come from a number of sources, here are some examples
+- of and from are almost the same
+  - They take a set of values (they don't have to be numbers) and iterate over them
+  - of uses indefinite parameters, from uses an array
+- interval will emit an incremented number after a given time
+- fromEvent is basically an event listener on a DOM element
+- ajax sends an HTTP request, and the result comes in an observable
+- webSocket is a websocket connection where each response is a sequence in an observable
+```
+
+---
+
+# Operators
+
+* Let you pipe a value down and do an action against it
+
+```notes
+- One of the really powerful things about RxJS are it's operators
+- They let you manipulate or do something against the value of your observable
+- And they let you do this in a pretty functional and declarative way
+```
+
+---
+
+<CodeSurfer
+  title='Operators'
+  code={require('!raw-loader!./code_samples/03_operators.js').default}
+  lang='javascript'
+  steps={[
+    {},
+    { range: [3, 4] },
+    { lines: [6] },
+    { lines: [7, 11] },
+    { lines: [7, 8, 11] },
+    { lines: [7, 8, 9, 11] },
+    { range: [7, 11] },
+    { range: [13, 15] },
+    {},
+  ]}
+/>
+
+```notes
+- I already showed off `map` earlier
+- But let's go through another simple example
+- First I'm going to grab a couple elements
+- Then I'm going to make an observable from click events
+- Next I'm going to make another observable that's going to be a manipulated version of the click event
+- Inside of my pipe, I'm going to first debounce clicks
+  - This will make it so events that happen inside 200ms are ignore
+- Next I'm going to use tap, which will just do something after debouncing
+  - In this case write to the console
+- Finally, for some reason I'm going to wait half a second before running our subscription
+- My subscription will essentially say it was clicked
+- We're doing some really complex things in just a few lines of code
+- Thanks to the operators
+```
+
+---
+
+<CodeSurfer
+  title='Subjects'
+  code={require('!raw-loader!./code_samples/04_subject_example.js').default}
+  lang='javascript'
+  steps={[
+    {},
+    { range: [1, 3] },
+    { lines: [4] },
+    { range: [6, 7] },
+    {}
+  ]}
+/>
+
+```notes
+- RxJS also has a thing called a subject
+- You can think of them a bit like reactive variables
+- Here's an example of using one
+- First I'm going to make a new subject
+- Next I'm going to make a subscription to it
+- Lastly I'm going to give it a couple values
+- So if we were to run this, you'd see the subscription ran for each value
+```
+
+---
+
+# Subjects Sources
+
+* `Subject`
+* `BehaviorSubject`
+* `ReplaySubject`
+* `AsyncSubject`
+
+```notes
+- Here are some different subjects you can create
+- There mostly the same, but when their subscriptions run, will be a bit different
+- With `Subject` new subscriptions will only run with values given after the subscription was created
+- `BehaviorSubject` new subscriptions will automatically run with the current or last value
+- `ReplaySubject` will run new subscriptions with every previous value
+- `AsyncSubject` will wait until it's told it's complete then run the subscriptions with each value
 ```
