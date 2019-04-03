@@ -83,9 +83,7 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 # Reasons to Care
 
 * Code can be more self contained
-* Manage async code
-  - Network request
-  - Anything the user does
+* Manage async code (network requests, user interaction)
 * You want to write functional code
 
 ```notes
@@ -106,7 +104,7 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 
 ---
 
-# You're Probably Not New To This
+# You're Probably Not New to This
 
 * React is an obvious example
   - (and Redux or Mobx)
@@ -169,7 +167,7 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 
 ---
 
-# Trivial Example output
+# Trivial Example Output
 
 ```js
 // The value: 74
@@ -297,4 +295,78 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 - `BehaviorSubject` new subscriptions will automatically run with the current or last value
 - `ReplaySubject` will run new subscriptions with every previous value
 - `AsyncSubject` will wait until it's told it's complete then run the subscriptions with each value
+```
+
+---
+
+# Where to Go Now
+
+```notes
+- So this has probably either been a lot of new stuff
+- Or a lot of stuff you're already familiar with
+- But I've got a few more things I wanted to mention to help you be able to learn more yourself
+```
+
+---
+
+# Helpful Resources
+
+* https://rxjs.dev
+* http://reactivex.io
+* https://github.com/tc39/proposal-observable
+* https://www.learnrxjs.io
+* https://xgrommx.github.io/rx-book
+
+```notes
+- Here are some links that I think are pretty good resources
+- The frist two are more official docs
+- The reactivex one is more conceptual
+- Observables are actually a proposal for javascript right now, so you can read more of the why
+  - I believe RxJS is a full implementation of the proposal
+- These last two, learnrxjs and rx-book, are both good for explaining things in a really simple way
+- The last one even has a handy, almost-flow-chart for which operator to use
+- All of these explain things better than I probably have, and also have diagrams which are nice
+```
+
+---
+
+<CodeSurfer
+  title='Pipe Syntax'
+  code={require('!raw-loader!./code_samples/05_pipe_syntax.js').default}
+  lang='javascript'
+  steps={[
+    {},
+  ]}
+/>
+
+```notes
+- If you do start to get into RxJS you might see things written a couple of ways
+- In this talk I've been showing examples using the newer syntax (which isn't that new)
+  - Observables were created from a shorter function
+  - Operators are used in a pipe method
+- In the older way
+  - Rather than using just `of`, the observable is created using `Observable.of`
+  - Operators are chained right on the observable
+  - And best practice was to import each operator used as a side effect
+- A big motivation for these changes was to help treeshaking
+  - RxJS is very large, you don't want to import all of it
+- With the added benefit that your imports don't have to be as specific
+- You now also get the ability to create pipes that are pure functions and can be reused
+```
+
+---
+
+# Integrations
+
+* Redux Observable (https://github.com/redux-observable/redux-observable)
+* Observables in Angular (https://angular.io/guide/observables-in-angular)
+
+```notes
+- Lastly I really quickly want to throw out a couple of more specific things
+- Redux Observable or Redux Epics is a really cool middleware for Redux created by Netflix
+- It's very popular for managing side effects with Redux, similar to Saga
+- The readme links to a really good talk from someone at Netflix talking about different usecases
+- The second is just a guide about using RxJS in Angular
+- Probably not very useful since you're either already using RxJS in Angular or not using Angular at all
+- But it has some good tips, and can help show off RxJS
 ```
