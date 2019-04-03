@@ -149,10 +149,10 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
   lang='javascript'
   steps={[
     {},
-    { range: [1, 3] },
-    { tokens: { 3: [2] } },
-    { range: [5, 6], tokens: { 7: [1] } },
-    { range: [5, 9] },
+    { range: [1, 4] },
+    { tokens: { 4: [2] } },
+    { range: [6, 7], tokens: { 8: [1] } },
+    { range: [6, 10] },
     {},
   ]}
 />
@@ -163,23 +163,8 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 - The dollar sign at the end of our variable is just convention for saying it's an observable
 - Next I'm going to pipe each value into a map function, which will multiply it by two
 - Finally I'm going to subscribe to my source, which will run the callback for each value after being piped 
-```
-
----
-
-# Trivial Example Output
-
-```js
-// The value: 74
-// The value: 84
-// The value: 2
-// The value: 204
-```
-
-```notes
 - If we were to run that code, this would be our output
-- You can see it's not really much of a useful example
-- But I'll build up to one that is
+- You can see it's not really much of a useful example, but I'm trying to keep things really simple
 ```
 
 ---
@@ -227,13 +212,13 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
   lang='javascript'
   steps={[
     {},
-    { range: [3, 4] },
-    { lines: [6] },
-    { lines: [7, 11] },
-    { lines: [7, 8, 11] },
-    { lines: [7, 8, 9, 11] },
-    { range: [7, 11] },
-    { range: [13, 15] },
+    { range: [4, 5] },
+    { lines: [7] },
+    { lines: [8, 12] },
+    { lines: [8, 9, 12] },
+    { lines: [8, 9, 10, 12] },
+    { range: [8, 12] },
+    { range: [14, 16] },
     {},
   ]}
 />

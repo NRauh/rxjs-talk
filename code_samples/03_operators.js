@@ -1,4 +1,5 @@
-import { fromEvent, debounceTime } from 'rxjs';
+import { fromEvent } from 'rxjs';
+import { debounceTime, tap, delay } from 'rxjs/operators';
 
 const button = document.querySelector('button');
 const output = document.querySelector('h1');
