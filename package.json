@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "mdx-deck talk.mdx",
-    "build": "mdx-deck build talk.mdx"
+    "build": "mdx-deck build --no-html talk.mdx"
   },
   "dependencies": {
     "mdx-deck": "^1.7.7",

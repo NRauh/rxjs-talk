@@ -1,5 +1,9 @@
-import { Notes } from 'mdx-deck';
+import { Head } from 'mdx-deck';
 import { CodeSurfer } from 'mdx-deck-code-surfer';
+
+<Head>
+  <title>Meeting RxJS</title>
+</Head>
 
 # Meeting RxJS
 
@@ -40,9 +44,10 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 
 # Spreadsheet Cliche
 
-```csv
-10,20,=SUM(A1,B1)
-```
+<video autoplay muted loop controls width="900">
+  <source src="Spreadsheet-example.webm" type="video/webm" />
+  <p>no video 4 u</p>
+</video>
 
 ```notes
 - A really common analogy is spreadsheets
@@ -269,9 +274,13 @@ import { CodeSurfer } from 'mdx-deck-code-surfer';
 # Subjects Sources
 
 * `Subject`
+  - Subscriptions are ran with values emitted after subscribing
 * `BehaviorSubject`
+  - Subscriptions ran with the value at time of subscription, and any later values
 * `ReplaySubject`
+  - When subscribed will run with all previous values and any later values
 * `AsyncSubject`
+  - Will run subscriptions with all previous values, but only after it’s told it’s complete
 
 ```notes
 - Here are some different subjects you can create
