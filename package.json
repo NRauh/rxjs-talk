@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "mdx-deck talk.mdx",
-    "build": "mdx-deck build --no-html talk.mdx && cp Spreadsheet-example.webm dist/"
+    "build": "mdx-deck build -d docs --no-html talk.mdx && cp Spreadsheet-example.webm docs/"
   },
   "dependencies": {
     "mdx-deck": "^1.7.7",
